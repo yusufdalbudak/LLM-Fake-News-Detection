@@ -15,7 +15,7 @@ import pickle
 import os
 
 try:
-    # Get absolute paths
+    # Get paths
     current_dir = os.path.dirname(os.path.abspath(__file__))
     dataset_dir = os.path.join(os.path.dirname(current_dir), 'dataset')
     
@@ -39,7 +39,7 @@ try:
     
     print(f"Loaded {len(fake_df)} fake news and {len(true_df)} true news articles")
     
-    # Rest of your code...
+   
     fake_df['label'] = 0
     true_df['label'] = 1
     
