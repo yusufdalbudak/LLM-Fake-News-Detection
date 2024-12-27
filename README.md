@@ -40,11 +40,11 @@ The News Authenticity Predictor is a sophisticated tool that leverages deep lear
 
 1. Clone the repository:
 
-bash
-git clone https://github.com/your-username/news-authenticity-predictor.git
-cd news-authenticity-predictor
-pip install -r requirements.txt
-python app.py
+
+       git clone https://github.com/your-username/news-authenticity-predictor.git
+       cd news-authenticity-predictor
+       pip install -r requirements.txt
+       python app.py
 
 
 ## Acknowledgments
