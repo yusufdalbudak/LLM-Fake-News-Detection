@@ -41,7 +41,7 @@ model, tokenizer = init_model_and_tokenizer()
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    # Add mock statistics (you can replace with real data)
+    # Add mock statistics 
     stats = {
         'analyzed': 1234,
         'accuracy': 95.5,
