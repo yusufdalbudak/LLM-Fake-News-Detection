@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>News Authenticity Predictor | AI-Powered Fake News Detection</title>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <div class="logo">
+                <i class="fas fa-newspaper"></i>
+                <i class="fas fa-check-circle logo-badge"></i>
+            </div>
+        </div>
+        <h1>News Authenticity Predictor</h1>
+        <p class="subtitle">AI-powered fake news detection system</p>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-label">Articles Analyzed</div>
+                <div class="stat-number">{{ stats.analyzed }}</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Accuracy Rate</div>
+                <div class="stat-number">{{ stats.accuracy }}%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Average Confidence</div>
+                <div class="stat-number">{{ stats.avg_confidence }}%</div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="action-btn primary-btn" id="analyze-new-btn">
+                <i class="fas fa-plus"></i> New Article
+            </button>
+            <button class="action-btn secondary-btn" id="sample-article-btn">
+                <i class="fas fa-lightbulb"></i> Try Sample
+            </button>
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for message in messages %}
+                        <p class="flash-message">{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="input-section">
+            <form method="POST" id="analysis-form">
+                <textarea 
+                    name="text" 
+                    placeholder="Paste your news article here to analyze its authenticity..."
+                >{{ request.form['text'] }}</textarea>
+                <button type="submit" id="analyze-btn">
+                    <span class="btn-text">Analyze Article</span>
+                </button>
+            </form>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="loading-spinner"></div>
+            <p>Analyzing article...</p>
+        </div>
+
+        {% if result %}
+        <div class="result">
+            <div class="result-header">Analysis Results</div>
+            <p class="prediction">
+                <strong>Prediction:</strong> 
+                <span class="{{ 'true' if result == 'Likely True' else 'false' }}">
+                    {{ result }}
+                </span>
+            </p>
+            <p class="confidence-text">
+                <strong>Confidence:</strong> {{ confidence }}
+            </p>
+            <div class="confidence-meter">
+                <div class="confidence-bar" style="width: {{ confidence }}"></div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</body>
+</html> 
